@@ -1,0 +1,4 @@
+mysql_server=localhost
+mysql_user=root
+mysql_db=dgaas_md
+mysql_password=hadoop
