@@ -1,0 +1,77 @@
+{
+  "enumDefs" : [],
+  "structDefs" : [],
+  "classificationDefs" : [],
+  "entityDefs" : [{
+    "superTypes" : [ "Asset", "Referenceable" ],
+    "attributeDefs" : [ {
+      "name" : "long_description",
+      "typeName" : "string",
+      "isOptional" : true,
+      "isUnique" : false,
+      "isIndexable" : false
+    } ],
+    "name" : "gov_policy",
+    "description" : "Governance Policy"
+  },{
+    "superTypes" : [ "Asset", "Referenceable" ],
+    "attributeDefs" : [ {
+      "name" : "long_description",
+      "typeName" : "string",
+      "isOptional" : true,
+      "isUnique" : false,
+      "isIndexable" : false,
+	  "Cardinality" : "LIST"
+    } ],
+    "name" : "gov_rule",
+    "description" : "Governance Rule"
+  }
+],
+  "relationshipDefs" : [{
+            "name": "policy_rule_relationship",
+            "typeVersion": "1.0",
+            "relationshipCategory": "COMPOSITION",
+            "endDef1": {
+                "type": "gov_policy",
+                "name": "gov_rules",
+                "isContainer": true,
+                "cardinality": "SET"
+            },
+            "endDef2": {
+                "type": "gov_rule",
+                "name": "gov_policy",
+                "isContainer": false,
+                "cardinality": "SINGLE"
+            },
+            "propagateTags": "NONE"
+},{
+    "relationshipCategory" : "ASSOCIATION",
+    "endDef1" : {
+      "type" : "gov_rule",
+      "name" : "governs_terms",
+      "cardinality" : "SET"
+    },
+    "endDef2" : {
+      "type" : "GlossaryTerm",
+      "name" : "governed_by_rules",
+      "cardinality" : "SET"
+    },
+    "name" : "rules_governing_terms",
+	"typeVersion": "1.0"
+  },{
+    "relationshipCategory" : "ASSOCIATION",
+    "endDef1" : {
+      "type" : "gov_rule",
+      "name" : "Governs asset",
+      "cardinality" : "SET"
+    },
+    "endDef2" : {
+      "type" : "hive_column",
+      "name" : "Governed by",
+      "cardinality" : "SET"
+    },
+    "name" : "governing_rule",
+	"typeVersion": "1.0"
+  }],
+  "empty" : true
+}
